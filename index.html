@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Recipes</title>
+		 <link rel="stylesheet" href="css/style.css" media="screen" charset="utf-8">
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+</html>
+
+<body>
+	<header>
+		<div class="dropdown">
+     		<button>Refine<i class="fa fa-angle-down"></i></button>
+     		<div id="dropdownBox">
+     			<input type="checkbox" id="gluten-free">Gluten-free<br>
+     			<input type="checkbox" id="dairy-free">Dairy-free<br>
+     			<input type="checkbox" id="vegetarian">Vegetarian<br>
+     			<input type="checkbox" id="vegan">Vegan<br>
+     			<button id="refinedSearch">Search</button>
+     		</div>
+     	</div>
+	 	<section id="search">
+        <input type="text" name="name" value="" id="textbox" placeholder="Ingredients...">
+        <a href="#" id="searchIcon"><img src="images/search.png" alt="" /></a>
+     	</section>
+     	<h1>Recipe Finder</h1>
+     </header>
+
+     <div class="container" class="clearfix">
+     </div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+	<script src="js/index.js"></script>
+</body>
