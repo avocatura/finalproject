@@ -1,4 +1,3 @@
-
 body {
 	background: #FFECDD;
 }
@@ -6,18 +5,8 @@ body {
 h1 {
 	display: block;
 	font-size: 40px;
-	width: 27%;
+	width: 26%;
 	margin:0 auto;
-}
-
-body.loader {
-  background-image: url(../images/loader.gif);
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-body.loader .container{
-  opacity: 0.5;
 }
 
 i {
@@ -30,6 +19,10 @@ i {
 	display: table;
 }
 
+.hidden {
+	display: none;
+}
+
 #search {
 	display: block;
 	float: right;
@@ -39,7 +32,7 @@ i {
 
 #search input {
 	height: 20px;
-	width: 175px;
+	width: 160px;
 }
 #search img {
 	height: 20px;
@@ -80,6 +73,12 @@ i {
 	margin: 1em auto;
 	text-align: center;
 }
+
+#loader {
+	width: 50px;
+	margin-top: 160px;
+}
+
 .recipe {
 	display: inline-block;
 	margin: .5em;

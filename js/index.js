@@ -1,16 +1,25 @@
 
-var callAPI = function() {
+const callAPI = function(health="") {
 	//Call Recipe API
-	let health = "";
 	var searchInput = $('#textbox').val();
 	var request = new XMLHttpRequest();
-	request.open('GET', "https://api.edamam.com/search?q=" + searchInput + "&app_id=b40b6efd&app_key=cfd561e15f8582929790d74b3e930dee&to=100" + health);
+	request.open('GET', "https://api.edamam.com/search?q=" + searchInput + "&app_id=b40b6efd&app_key=cfd561e15f8582929790d74b3e930dee&to=100&" + health);
 	request.send();
 	request.onload = function() {
 	var x = JSON.parse(request.response);
 	console.log(request.response);
-	console.log(x.hits[0].recipe);
 
+	//Toggle loader class hidden on loading of the API
+	var promiseApi = new Promise(function(resolve, reject) {
+	if (request.status === 200) {
+		resolve($("#loader").toggleClass("hidden"));
+		console.log("Success");
+	}
+	else {
+		reject(alert("Sorry, this page failed to load."));
+		console.log("failure");
+	};
+	});
 	
 	//Clear html from previous searches
 	$(".recipe").remove();
@@ -20,36 +29,41 @@ var callAPI = function() {
 	<div class="recipe">
 		<h2> ${x.hits[i].recipe.label} </h2>
 		<img src=${x.hits[i].recipe.image} alt="">
-		<a href=${x.hits[i].recipe.shareAs} target="_blank">${x.hits[i].recipe.source}</a>
+		<a href=${x.hits[i].recipe.url} target="_blank">${x.hits[i].recipe.source}</a>
 	</div>
 	`);
 	};
 	};
 };
 
-$("#searchIcon").click(callAPI);
+//window.onload = callAPI; ;
 
+//Call callAPI function on search icon click
+$("#searchIcon").click(function() {
+	$("#loader").toggleClass("hidden");
+	callAPI();
+});
+//Call callAPI function is the enter key is pressed within the search bar
+$("#textbox").keyup(function(event){
+	if (event.keyCode === 13) {
+		$("#searchIcon").click();
+	}
+});
+//Toggle the visibility of the dropdown box when the refine button is clicked
 $(".dropdown button").click(function() {
 	$("#dropdownBox").toggleClass("show");
 })
 
 $("#refinedSearch").click(function() {
-	if ($("#vegan").is(":checked")){
-		let health = "&health=vegan";
-		callAPI;
-	} else {let health = ""; callAPI};
+	$("#loader").toggleClass("hidden");
+	if (($("input:checkbox:checked").length) === 4) {
+		let health = "health=vegan&health=vegetarian";
+		callAPI(health);
+	} else if ($("#vegan").is(":checked")&&($("#vegetarian").is(":checked"))){
+		let health = "health=vegan&health=vegetarian";
+		callAPI(health);
+	} else if ($("#vegetarian").is(":checked")) {
+		let health ="health=vegetarian";
+		callAPI(health);
+	}  else {let health = "health=vegan"; callAPI(health)};
 });
-
-
-
-	// var promiseApi = new Promise(function(resolve, reject) {
-	// if (request.status === 200) {
-	// 	resolve($("body").toggleClass("loader"));
-	// 	console.log("Success");
-	// }
-	// else {
-	// 	reject(alert("Sorry, this page failed to load."));
-	// 	console.log("failure");
-	// };
-	// });
-
